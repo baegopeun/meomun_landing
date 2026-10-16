@@ -44,6 +44,7 @@ h1, h2, h3, p, ul, ol { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pc-br { display: inline; }
+.m-br, .places-note { display: none; }
 
 /* ── 페이지 배경: 흐린 사진 → 바탕색으로 사라짐 + 종이 결 ── */
 .page { position: relative; overflow: hidden; isolation: isolate; }
@@ -154,7 +155,7 @@ ul, ol { padding: 0; list-style: none; }
 /* ── 이렇게 써요 ── */
 .section-title { font-size: 40px; font-weight: 700; line-height: 1.5; text-align: center; }
 .how { position: relative; max-width: 1440px; margin: 0 auto; padding: 120px var(--gutter); display: flex; flex-direction: column; align-items: center; gap: 48px; }
-.steps { position: relative; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.steps { position: relative; width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .glow { position: absolute; width: 380px; height: 380px; border-radius: 50%; filter: blur(150px); opacity: .32; z-index: -1; top: 50%; transform: translate(-50%, -50%); }
 .glow.g1 { background: var(--red); left: 16.7%; }
 .glow.g2 { background: var(--teal); left: 50%; }
@@ -189,9 +190,10 @@ ul, ol { padding: 0; list-style: none; }
 .chip { align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; border-radius: 999px; background: rgba(0, 0, 0, .08); border: 1px solid var(--line); font-size: 13px; font-weight: 700; line-height: 1.4; }
 .mini-albums { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .visual.make { gap: 12px; justify-content: center; }
-.make-row { display: flex; align-items: center; gap: 14px; }
-.make-row img { flex: none; width: 112px; height: 112px; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
-.make-row .lp { width: 112px; }
+.make-row { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.make-row img { flex: 0 1 112px; min-width: 0; width: 112px; aspect-ratio: 1; height: auto; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
+.make-row .lp { flex: 0 1 112px; min-width: 0; width: 112px; }
+.make-row .arrow { flex: none; }
 .arrow { width: 22px; height: 22px; border-radius: 5px; background: rgba(0, 0, 0, .12); display: grid; place-items: center; opacity: .85; }
 .field.song-pick { background: rgba(0, 0, 0, .08); color: var(--ink); font-weight: 500; }
 .range { display: grid; gap: 8px; }
@@ -283,6 +285,7 @@ ul, ol { padding: 0; list-style: none; }
 @media (max-width: 767px) {
   :root { --gutter: 16px; }
   .pc-br { display: none; }
+  .m-br { display: inline; }
   .page-bg { height: 1000px; }
   .page-bg::before { left: -220px; right: -220px; top: -80px; height: 900px; }
 
@@ -293,42 +296,47 @@ ul, ol { padding: 0; list-style: none; }
 
   .hero { flex-direction: column; align-items: stretch; gap: 32px; padding: 32px 16px 56px; }
   .hero-text { flex: none; gap: 16px; }
-  .hero h1 { font-size: 30px; line-height: 1.35; }
-  .hero-text p { font-size: 15px; line-height: 1.6; }
+  .hero h1 { font-size: 28px; line-height: 1.35; }
+  .hero-text p { font-size: 14px; line-height: 1.6; }
   .hero-visual { flex: none; }
   .album-grid, .album-grid .col { gap: 10px; }
 
   .intro { padding: 56px 16px; gap: 32px; }
-  .intro-text { font-size: 19px; line-height: 1.6; }
-  .places { grid-template-columns: 1fr; }
-  .place img { aspect-ratio: 328 / 360; }
+  .intro-text { font-size: 16px; line-height: 1.65; }
+  .places { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .place img { aspect-ratio: 382 / 420; border-radius: 14px; }
+  .place figcaption { display: none; }
+  .places-note { display: block; align-self: flex-start; margin-top: -22px; }
 
-  .section-title { font-size: 26px; }
+  .section-title { font-size: 22px; }
   .how { padding: 56px 16px; gap: 28px; }
   .steps { grid-template-columns: 1fr; gap: 16px; }
   .glow { width: 300px; height: 300px; }
   .glow.g1 { left: 20%; top: 17%; } .glow.g2 { left: 80%; top: 50%; } .glow.g3 { left: 20%; top: 83%; }
   .step { padding: 20px; gap: 10px; }
   .step-no { font-size: 13px; }
-  .step h3 { font-size: 20px; }
-  .step-desc { font-size: 14px; line-height: 1.6; min-height: 0; }
+  .step h3 { font-size: 18px; }
+  .step-desc { font-size: 13px; line-height: 1.6; min-height: 0; }
+  .town { font-size: 14px; }
+  .field { font-size: 13px; }
   .visual { height: auto; min-height: 257px; }
 
   .safe { padding: 8px 16px 56px; }
   .safe-card { padding: 28px 22px; gap: 16px; }
-  .safe-card h2 { font-size: 22px; }
+  .safe-card h2 { font-size: 20px; }
   .safe-card ul { gap: 16px; }
-  .safe-card li { font-size: 15px; line-height: 1.65; padding-left: 15px; }
+  .safe-card li { font-size: 14px; line-height: 1.65; padding-left: 15px; }
   .safe-card li::before { top: 10px; }
 
   .faq { padding: 48px 16px 56px; gap: 24px; }
   .faq-list { gap: 10px; }
-  .faq summary { padding: 18px 20px; font-size: 15px; line-height: 1.5; }
-  .faq details p { padding: 0 20px 18px; margin-top: -8px; font-size: 14px; line-height: 1.6; }
+  .faq summary { padding: 16px 18px; font-size: 14px; line-height: 1.5; }
+  .faq summary svg { width: 20px; height: 20px; }
+  .faq details p { padding: 0 18px 16px; margin-top: -6px; font-size: 13px; line-height: 1.6; }
 
   .last { padding: 0 16px 56px; }
   .last-board { padding: 56px 20px 64px; gap: 24px; }
-  .last-board h2 { font-size: 24px; line-height: 1.4; }
+  .last-board h2 { font-size: 22px; line-height: 1.4; }
   .status { padding: 8px 16px; font-size: 13px; }
   .last-board .ai-note { right: 16px; bottom: 14px; }
 
@@ -337,16 +345,16 @@ ul, ol { padding: 0; list-style: none; }
   .foot nav a { font-size: 13px; }
 
   .doc-head { padding: 40px 16px 28px; gap: 12px; }
-  .doc-head h1 { font-size: 26px; line-height: 1.4; }
+  .doc-head h1 { font-size: 24px; line-height: 1.4; }
   .doc-head p { font-size: 13px; }
   .doc { flex-direction: column; gap: 24px; padding: 0 16px 64px; }
   .toc { position: static; flex: none; max-height: none; padding: 20px; border-radius: 16px; background: rgba(0, 0, 0, .03); gap: 6px; }
   .toc-label { font-size: 12px; margin-bottom: 4px; }
   .toc a { font-size: 13px; }
   .doc-body { flex: none; gap: 36px; }
-  .doc-body p, .item { font-size: 15px; line-height: 1.7; }
+  .doc-body p, .item { font-size: 14px; line-height: 1.7; }
   .article { gap: 10px; }
-  .article h2 { font-size: 18px; }
+  .article h2 { font-size: 17px; }
   .chapter { font-size: 13px; }
   .item { gap: 6px; }
   .item .no { min-width: 19px; }
