@@ -7,6 +7,8 @@
   <meta name="description" content="머문 서비스 이용약관 — 시행일 2026년 10월 16일 · 운영자 꼬르륵">
   <meta name="theme-color" content="#f9f7f5">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="/assets/css/style.css">
@@ -16,7 +18,7 @@
 <div class="page">
   <div class="grain" aria-hidden="true"></div>
   <header class="top">
-    <a class="logo" href="/">머문</a>
+    <a class="logo" href="/" aria-label="머문 홈"><img src="/assets/img/logo.svg" alt="meomun" width="860" height="130"></a>
     <a class="back" href="/">← 홈으로</a>
   </header>
   <main>
@@ -198,7 +200,15 @@
 (() => {
   const links = [...document.querySelectorAll('.toc a')];
   const targets = links.map(a => document.querySelector(a.getAttribute('href')));
-  const set = i => links.forEach((a, j) => a.classList.toggle('on', j === i));
+  const box = document.querySelector('.toc');
+  const set = i => {
+    links.forEach((a, j) => a.classList.toggle('on', j === i));
+    const a = links[i];
+    if (box && a && box.scrollHeight > box.clientHeight) {          // 목차가 화면보다 길면 현재 항목이 보이게 목차만 스크롤
+      const top = a.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop;   // 목차 상자 안에서의 위치
+      if (top < box.scrollTop + 40 || top > box.scrollTop + box.clientHeight - 60) box.scrollTop = top - box.clientHeight / 2;
+    }
+  };
   const onScroll = () => {
     let cur = 0;
     targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top < 120) cur = i; });
