@@ -12,7 +12,6 @@
   --muted: #6b6b73;
   --muted-2: #64646c;
   --caption: #82828a;
-  --accent: #b4561c;
   --peach: #ffc79a;
   --line: rgba(0, 0, 0, .08);
   --line-soft: rgba(0, 0, 0, .06);
@@ -228,7 +227,7 @@ ul, ol { padding: 0; list-style: none; }
 .faq summary svg { flex: none; transition: transform .2s; }
 .faq details[open] summary svg { transform: rotate(180deg); }
 .faq details p { padding: 0 28px 22px; margin-top: -10px; font-size: 16px; line-height: 1.65; color: #45454d; }
-.faq summary:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+.faq summary:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
 
 /* ── 마지막 ── */
 .last { padding: 0 var(--gutter) 120px; }
@@ -268,12 +267,12 @@ ul, ol { padding: 0; list-style: none; }
 .toc a.toc-group { font-size: 12px; font-weight: 700; line-height: 1.5; color: var(--muted); margin-top: 8px; }
 .toc a.toc-group:first-of-type { margin-top: 0; }
 .toc a:hover { color: var(--ink); }
-.toc a.on { color: var(--accent); font-weight: 700; }
+.toc a.on { color: var(--ink); font-weight: 700; }
 .doc-body { flex: 0 1 720px; display: flex; flex-direction: column; gap: 52px; min-width: 0; }
 .doc-body p, .item { font-size: 17px; line-height: 1.8; color: var(--body); }
 .doc-body strong { font-weight: 700; color: var(--ink); }
-.doc-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-.chapter { border-top: 1px solid var(--line); padding-top: 14px; margin-top: -14px; font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--accent); scroll-margin-top: 24px; }
+.doc-body a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.chapter { border-top: 1px solid var(--line); padding-top: 14px; margin-top: -14px; font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--ink); scroll-margin-top: 24px; }
 .article { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 24px; }
 .article h2 { font-size: 22px; font-weight: 700; line-height: 1.5; color: var(--ink); margin-bottom: 2px; }
 .item { display: flex; gap: 8px; }
