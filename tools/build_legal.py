@@ -111,7 +111,7 @@ TEMPLATE = """<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
-  <meta name="description" content="{title} — {meta}">
+  <meta name="description" content="{title}">
   <meta name="theme-color" content="#f9f7f5">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -131,7 +131,6 @@ TEMPLATE = """<!doctype html>
   <main>
     <div class="doc-head">
       <h1>{title}</h1>
-      <p>{meta}</p>
     </div>
     <div class="doc">
 {toc}      <div class="doc-body">
@@ -201,7 +200,7 @@ def build():
             for href, label in FOOT_LINKS
         )
         page = TEMPLATE.format(
-            title=html.escape(meta["TITLE"]), meta=html.escape(meta.get("META", "")), src=src,
+            title=html.escape(meta["TITLE"]), src=src,
             toc=toc_html, body=body, foot=foot, script=SCROLLSPY if toc_html else "",
         )
         target = ROOT / out_dir / "index.html"
